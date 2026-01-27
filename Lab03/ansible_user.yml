@@ -1,0 +1,13 @@
+user
+- name: ansible_user
+  shell: /bin/bash 
+  state: present 
+  password: $6$Hq4hTHF1xD.9ecY0$Wst2wxBsntACgCE7TFCR9ULR3IvJ3VdWylvLa1X0WBpnf73eEsnVWaJ1tctpEbZeWkUdf.6FnkaEe099l81NF.
+
+- name: lineinfile
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/ansible
+    state: present
+    insertafter: #User alias specification 
+    line: 'ansible_user ALL=(ALL) NOPASSWD: ALL'
